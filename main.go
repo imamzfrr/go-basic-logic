@@ -5,7 +5,7 @@ import (
 	slice "github.com/imamzfrr/go-print-slice"
 )
 
-// Logic 1
+// Logic 2
 func generateOddMatrix(n int) [][]int {
 	matrix := make([][]int, n)
 	for i := range matrix {
@@ -33,30 +33,13 @@ func generateReverseDiagonalMatrix(n int) [][]int {
 		matrix[i] = make([]int, n)
 	}
 	for i := 0; i < n; i++ {
-		row := n - 1 - i           // Menentukan baris dari bawah ke atas
-		col := i                   // Kolom berjalan normal
-		matrix[row][col] = 1 + 2*i // Mengisi dengan bilangan ganjil
+		row := n - 1 - i
+		col := i
+		matrix[row][col] = 1 + 2*i
 	}
 
 	return matrix
 }
-func generateSlice(start, step, count int) []int {
-	slice := make([]int, count)
-	for i := 0; i < count; i++ {
-		slice[i] = start + (i * step)
-	}
-	return slice
-}
-
-func generateReverseSlice(start, step, count int) []int {
-	slice := make([]int, count)
-	for i := 0; i < count; i++ {
-		slice[i] = start - (i * step)
-	}
-	return slice
-}
-
-//Logic 2
 
 func soal04(n int) [][]int {
 	matrix := make([][]int, n)
@@ -64,7 +47,7 @@ func soal04(n int) [][]int {
 		matrix[i] = make([]int, n)
 	}
 
-	num := 1 // Nilai awal di baris pertama
+	num := 1
 	for rIndex, row := range matrix {
 		for cIndex := range row {
 			row[cIndex] = num
@@ -142,48 +125,140 @@ func soal12(n int) [][]int {
 		matrix[i] = make([]int, n)
 	}
 
-	for i := 0; i < n; i++ {
-		value := 1
-		for j := 0; j <= i; j += 3 {
-			matrix[i][j] = value
-			if j+1 < n {
-				matrix[i][n-1-j] = 17
-			}
-			value += 2
+	for col := 0; col < (n+1)/2; col++ {
+		num := 1 + (col * 2)
+		for row := col; row < n-col; row++ {
+			matrix[row][col] = num
+			matrix[row][n-1-col] = num
 		}
 	}
 	return matrix
 }
 
 func soal10(n int) []interface{} {
-	slice := make([]interface{}, n)
-	for i := 1; i <= n; i++ {
-		if i%4 == 0 {
-			slice[i-1] = i
+	result := make([]interface{}, n)
+
+	for i := 0; i < n; i++ {
+		if i%2 == 0 {
+			result[i] = 1 << uint(i/2)
 		} else {
-			slice[i-1] = "fizz"
+			result[i] = "fizz"
 		}
+	}
+
+	return result
+}
+
+func soal11(n int) []interface{} {
+	result := make([]interface{}, n)
+
+	prev := 1
+	for i := 0; i < n; i++ {
+		if i%2 == 0 {
+			result[i] = "buzz"
+		} else {
+			result[i] = prev
+			prev *= 2
+		}
+	}
+
+	return result
+}
+
+// Logic 1
+func generateSlice(start, step, count int) []int {
+	slice := make([]int, count)
+	for i := 0; i < count; i++ {
+		slice[i] = start + (i * step)
 	}
 	return slice
 }
 
-func soal11(n int) []interface{} {
-	slice := make([]interface{}, n)
+func generateReverseSlice(start, step, count int) []int {
+	slice := make([]int, count)
+	for i := 0; i < count; i++ {
+		slice[i] = start - (i * step)
+	}
+	return slice
+}
+
+func GeneratePattern(n, start, step int) []int {
+	result := make([]int, n)
+	half := n / 2
+
+	for i := 0; i < half; i++ {
+		value := start + (i * step)
+		result[i] = value
+		result[n-1-i] = value
+	}
+
+	if n%2 != 0 {
+		result[half] = start + (half * step)
+	}
+
+	return result
+}
+
+func Soal12(n int) []int {
+	result := make([]int, n)
+	x := 1
+	y := 2
 
 	for i := 0; i < n; i++ {
-		if (i+1)%2 == 0 {
-			slice[i] = "buzz"
+		result[i] = x + (i%4)*y
+	}
+	return result
+}
+
+// Logic 3
+func soalLogic301(n int) [][]int {
+	matrix := make([][]int, n)
+	for i := range matrix {
+		matrix[i] = make([]int, n)
+	}
+	count := 1
+
+	for row := 0; row < n; row++ {
+		if row%2 == 0 {
+			// Isi dari kiri ke kanan
+			for col := 0; col <= row; col++ {
+				matrix[row][col] = count
+				count += 2
+			}
 		} else {
-			if i < 2 {
-				slice[i] = i + 1
-			} else {
-				if val, ok := slice[i-2].(int); ok {
-					slice[i] = val * 2
-				}
+			// Isi dari kanan ke kiri
+			for col := row; col >= 0; col-- {
+				matrix[row][col] = count
+				count += 2
 			}
 		}
 	}
-	return slice
+	return matrix
+}
+
+func soalLogic302(n int) [][]int {
+	matrix := make([][]int, n)
+	for i := range matrix {
+		matrix[i] = make([]int, n)
+	}
+	count := 1
+
+	for row := 0; row < n; row++ {
+		if row%2 == 0 {
+			// Isi dari kiri ke kanan
+			for col := row; col < n; col++ {
+				matrix[row][col] = count
+				count += 2
+			}
+		} else {
+			// Isi dari kanan ke kiri
+			for col := n - 1; col >= row; col-- {
+				matrix[row][col] = count
+				count += 2
+			}
+		}
+	}
+	return matrix
 }
 
 func main() {
@@ -213,13 +288,29 @@ func main() {
 	slice.PrintSlice(generateReverseSlice(30, 3, 10))
 	fmt.Println()
 
+	fmt.Println("Soal 7:")
+	slice.PrintSlice(GeneratePattern(10, 1, 2))
+	fmt.Println()
+
+	fmt.Println("Soal 8:")
+	slice.PrintSlice(GeneratePattern(10, 2, 2))
+	fmt.Println()
+
+	fmt.Println("Soal 9:")
+	slice.PrintSlice(GeneratePattern(10, 3, 3))
+	fmt.Println()
+
 	fmt.Println("Soal 10:")
 	slice.PrintSliceString(soal10(n))
-	fmt.Println()
 
 	fmt.Println("Soal 11:")
 	slice.PrintSliceString(soal11(n))
+
+	fmt.Println("Soal 12:")
+	slice.PrintSlice(Soal12(12))
 	fmt.Println()
+
+	fmt.Println("=======LOGIC 2 =======")
 
 	m := 9 //Logic 2
 	fmt.Println("Soal 01:")
@@ -243,6 +334,17 @@ func main() {
 	fmt.Println("Soal 10:")
 	slice.PrintSlice2(soal10_2(m))
 
-	fmt.Println("Soal 12:") //masih error
+	fmt.Println("Soal 12:")
 	slice.PrintSlice2(soal12(m))
+
+	fmt.Println()
+	fmt.Println("=======LOGIC 3 =======")
+	fmt.Println()
+
+	fmt.Println("Soal 1: ")
+	slice.PrintSlice2(soalLogic301(9))
+
+	fmt.Println("Soal 2: ")
+	slice.PrintSlice2(soalLogic302(9))
+
 }
