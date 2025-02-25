@@ -508,22 +508,17 @@ func soalLogic311(n int) [][]int {
 		matrix[i] = make([]int, n)
 	}
 
-	// First pattern: diagonal elements
 	value := 1
 	for i := 0; i < n/2; i++ {
-		// Apply value to symmetric positions
 		matrix[i][i] = value
 		matrix[n-1-i][i] = value
 		value += 2
 	}
 
-	// Reset value for second pattern
 	value = 1
 
-	// Second pattern: zigzag in right half based on row parity
 	for row := 0; row <= n/2; row++ {
 		if row%2 == 0 {
-			// Even rows: right to middle
 			for col := n - 1; col >= n/2; col-- {
 				if row+col >= 8 {
 					matrix[row][col] = value
@@ -532,7 +527,6 @@ func soalLogic311(n int) [][]int {
 				}
 			}
 		} else {
-			// Odd rows: middle to right
 			for col := n / 2; col < n; col++ {
 				if row+col >= 8 {
 					matrix[row][col] = value
