@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/stretchr/testify/assert"
+	"reflect"
 	"testing"
 )
 
@@ -94,17 +95,241 @@ func TestSoal10_2(t *testing.T) {
 
 func TestSoal0212(t *testing.T) {
 	expected := [][]int{
-		{1, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 3, 0, 0, 0, 0, 0, 3, 1},
-		{1, 3, 5, 0, 0, 0, 5, 3, 1},
-		{1, 3, 5, 7, 0, 7, 5, 3, 1},
-		{1, 3, 5, 7, 9, 7, 5, 3, 1},
-		{1, 3, 5, 7, 0, 7, 5, 3, 1},
-		{1, 3, 5, 0, 0, 0, 5, 3, 1},
-		{1, 3, 0, 0, 0, 0, 0, 3, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 17},
+		{1, 3, 0, 0, 0, 0, 0, 15, 17},
+		{1, 3, 5, 0, 0, 0, 13, 15, 17},
+		{1, 3, 5, 7, 0, 11, 13, 15, 17},
+		{1, 3, 5, 7, 9, 11, 13, 15, 17},
+		{1, 3, 5, 7, 0, 11, 13, 15, 17},
+		{1, 3, 5, 0, 0, 0, 13, 15, 17},
+		{1, 3, 0, 0, 0, 0, 0, 15, 17},
+		{1, 0, 0, 0, 0, 0, 0, 0, 17},
 	}
 	assert.Equal(t, expected, soal12(9))
+}
+
+// Logic 3
+func TestSoalLogic301(t *testing.T) {
+	expected := [][]int{
+		{1, 0, 0},
+		{5, 3, 0},
+		{7, 9, 11},
+	}
+	result := soalLogic301(3)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("soalLogic301(3) = %v, expected %v", result, expected)
+	}
+}
+
+func TestSoalLogic302(t *testing.T) {
+	expected := [][]int{
+		{1, 3, 5},
+		{0, 9, 7},
+		{0, 0, 11},
+	}
+	result := soalLogic302(3)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("soalLogic302(3) = %v, expected %v", result, expected)
+	}
+}
+
+func TestSoalLogic303(t *testing.T) {
+	expected := [][]int{
+		{2, 4, 6},
+		{11, 8, 0},
+		{14, 0, 0},
+	}
+	result := soalLogic303(3)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("soalLogic303(3) = %v, expected %v", result, expected)
+	}
+}
+
+func TestSoalLogic304(t *testing.T) {
+	expected := [][]int{
+		{0, 0, 1},
+		{0, 3, 5},
+		{11, 9, 7},
+	}
+	result := soalLogic304(3)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("soalLogic304(3) = %v, expected %v", result, expected)
+	}
+}
+
+func TestSoalLogic305(t *testing.T) {
+	expected := [][]int{
+		{1, 0, 1},
+		{5, 3, 5},
+		{1, 0, 1},
+	}
+	result := soalLogic305(3)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("soalLogic305(3) = %v, expected %v", result, expected)
+	}
+}
+
+func TestSoalLogic306(t *testing.T) {
+	expected := [][]int{
+		{1, 3, 5, 7, 9, 11, 13, 15, 17},
+		{0, 31, 29, 27, 25, 23, 21, 19, 0},
+		{0, 0, 33, 35, 37, 39, 41, 0, 0},
+		{0, 0, 0, 47, 45, 43, 0, 0, 0},
+		{0, 0, 0, 0, 49, 0, 0, 0, 0},
+		{0, 0, 0, 47, 45, 43, 0, 0, 0},
+		{0, 0, 33, 35, 37, 39, 41, 0, 0},
+		{0, 31, 29, 27, 25, 23, 21, 19, 0},
+		{1, 3, 5, 7, 9, 11, 13, 15, 17},
+	}
+	assert.Equal(t, expected, soalLogic306(9))
+}
+
+func TestSoalLogic307(t *testing.T) {
+	expected := [][]int{
+		{0, 0, 0, 0, 1, 0, 0, 0, 0},
+		{0, 0, 0, 3, 5, 7, 0, 0, 0},
+		{0, 0, 9, 11, 13, 15, 17, 0, 0},
+		{0, 19, 21, 23, 25, 27, 29, 31, 0},
+		{49, 47, 45, 43, 41, 43, 45, 47, 49},
+		{0, 19, 21, 23, 25, 27, 29, 31, 0},
+		{0, 0, 17, 15, 13, 11, 9, 0, 0},
+		{0, 0, 0, 3, 5, 7, 0, 0, 0},
+		{0, 0, 0, 0, 1, 0, 0, 0, 0},
+	}
+	result := soalLogic307(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
+}
+
+func TestSoalLogic308(t *testing.T) {
+	expected := [][]int{
+		{0, 0, 0, 0, 49, 0, 0, 0, 0},
+		{0, 0, 0, 19, 47, 19, 0, 0, 0},
+		{0, 0, 17, 21, 45, 21, 17, 0, 0},
+		{0, 3, 15, 23, 43, 23, 15, 3, 0},
+		{1, 5, 13, 25, 41, 25, 13, 5, 1},
+		{0, 7, 15, 27, 43, 27, 15, 7, 0},
+		{0, 0, 17, 29, 45, 29, 17, 0, 0},
+		{0, 0, 0, 31, 47, 31, 0, 0, 0},
+		{0, 0, 0, 0, 49, 0, 0, 0, 0},
+	}
+	result := soalLogic308(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
+}
+
+func TestSoalLogic309(t *testing.T) {
+	expected := [][]int{
+		{0, 0, 0, 0, 1, 0, 0, 0, 0},
+		{0, 0, 0, 1, 3, 1, 0, 0, 0},
+		{0, 0, 1, 3, 5, 3, 1, 0, 0},
+		{0, 1, 3, 5, 7, 5, 3, 1, 0},
+		{1, 3, 5, 7, 9, 7, 5, 3, 1},
+		{0, 1, 3, 5, 7, 5, 3, 1, 0},
+		{0, 0, 1, 3, 5, 3, 1, 0, 0},
+		{0, 0, 0, 1, 3, 1, 0, 0, 0},
+		{0, 0, 0, 0, 1, 0, 0, 0, 0},
+	}
+	result := soalLogic309(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
+}
+
+func TestSoalLogic310(t *testing.T) {
+	expected := [][]int{
+		{0, 0, 0, 0, 9, 0, 0, 0, 0},
+		{0, 0, 0, 9, 7, 9, 0, 0, 0},
+		{0, 0, 9, 7, 5, 7, 9, 0, 0},
+		{0, 9, 7, 5, 3, 5, 7, 9, 0},
+		{9, 7, 5, 3, 1, 3, 5, 7, 9},
+		{0, 9, 7, 5, 3, 5, 7, 9, 0},
+		{0, 0, 9, 7, 5, 7, 9, 0, 0},
+		{0, 0, 0, 9, 7, 9, 0, 0, 0},
+		{0, 0, 0, 0, 9, 0, 0, 0, 0},
+	}
+	result := soalLogic310(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
+}
+
+func TestSoalLogic311(t *testing.T) {
+	expected := [][]int{
+		{1, 0, 0, 0, 0, 0, 0, 0, 1},
+		{0, 3, 0, 0, 0, 0, 0, 3, 5},
+		{0, 0, 5, 0, 0, 0, 11, 9, 7},
+		{0, 0, 0, 7, 0, 13, 15, 17, 19},
+		{0, 0, 0, 0, 29, 27, 25, 23, 21},
+		{0, 0, 0, 7, 0, 13, 15, 17, 19},
+		{0, 0, 5, 0, 0, 0, 11, 9, 7},
+		{0, 3, 0, 0, 0, 0, 0, 3, 5},
+		{1, 0, 0, 0, 0, 0, 0, 0, 1},
+	}
+
+	result := soalLogic311(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
+}
+
+func TestSoalLogic312(t *testing.T) {
+	expected := [][]int{
+		{1, 0, 0, 0, 0, 0, 0, 0, 1},
+		{5, 3, 0, 0, 0, 0, 0, 3, 0},
+		{7, 9, 11, 0, 0, 0, 5, 0, 0},
+		{19, 17, 15, 13, 0, 7, 0, 0, 0},
+		{21, 23, 25, 27, 29, 0, 0, 0, 0},
+		{19, 17, 15, 13, 0, 7, 0, 0, 0},
+		{7, 9, 11, 0, 0, 0, 5, 0, 0},
+		{5, 3, 0, 0, 0, 0, 0, 3, 0},
+		{1, 0, 0, 0, 0, 0, 0, 0, 1},
+	}
+
+	result := soalLogic312(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
+}
+
+func TestSoalLogic313(t *testing.T) {
+	expected := [][]int{
+		{0, 0, 0, 0, 9, 0, 0, 0, 0},
+		{0, 0, 0, 7, 0, 7, 0, 0, 0},
+		{0, 0, 5, 0, 9, 0, 5, 0, 0},
+		{0, 3, 0, 7, 0, 7, 0, 3, 0},
+		{1, 0, 5, 0, 9, 0, 5, 0, 1},
+		{0, 3, 0, 7, 0, 7, 0, 3, 0},
+		{0, 0, 5, 0, 9, 0, 5, 0, 0},
+		{0, 0, 0, 7, 0, 7, 0, 0, 0},
+		{0, 0, 0, 0, 9, 0, 0, 0, 0},
+	}
+
+	result := soalLogic313(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
+}
+
+func TestSoalLogic314(t *testing.T) {
+	expected := [][]int{
+		{1, 35, 37, 71, 73, 107, 109, 143, 145},
+		{3, 33, 39, 69, 75, 105, 111, 141, 147},
+		{5, 31, 41, 67, 77, 103, 113, 139, 149},
+		{7, 29, 43, 65, 79, 101, 115, 137, 151},
+		{9, 27, 45, 63, 81, 99, 117, 135, 153},
+		{11, 25, 47, 61, 83, 97, 119, 133, 155},
+		{13, 23, 49, 59, 85, 95, 121, 131, 157},
+		{15, 21, 51, 57, 87, 93, 123, 129, 159},
+		{17, 19, 53, 55, 89, 91, 125, 127, 161},
+	}
+
+	result := soalLogic314(9)
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
 }
 
 // Logic 1
